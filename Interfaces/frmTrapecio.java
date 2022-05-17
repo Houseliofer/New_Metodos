@@ -8,6 +8,7 @@ package Interfaces;
 import Clases.Funcion;
 import Clases.frame_panel;
 import Clases.metodos.Trapecio;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -35,6 +36,7 @@ public class frmTrapecio extends javax.swing.JFrame {
         txtValorA.setEnabled(false);
         txtValorB.setEnabled(false);
         txtN.setEnabled(false);
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/estadisticas.png")));
     }
 
     /**

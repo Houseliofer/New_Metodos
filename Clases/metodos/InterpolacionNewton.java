@@ -1,69 +1,107 @@
 package Clases.metodos;
 
 import java.text.DecimalFormat;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 
 public class InterpolacionNewton {
 
-    private float x0, x1, x2, x3;
-    private float fx0, fx1, fx2, fx3, x;
-    private float b0, b1, b2, b3, resultado;
-    private DecimalFormat formato;
+    public InterpolacionNewton() {
 
-    public InterpolacionNewton(float x, float x0, float x1, float x2, float x3, float fx0,
-            float fx1, float fx2, float fx3) {
-
-        formato = new DecimalFormat("0.000000");
-        this.x = x;
-
-        this.x0 = x0;
-        this.x1 = x1;
-        this.x2 = x2;
-        this.x3 = x3;
-
-        this.fx0 = fx0;
-        this.fx1 = fx1;
-        this.fx2 = fx2;
-        this.fx3 = fx3;
-
-        this.b0 = fx0;
     }
 
-    public String calcular() {
-        calcularB1();
-        calcularB2();
-        calcularB3();
-
-        resultado = b0 + (b1 * (x - x0)) + (b2 * (x - x0) * (x - x1)) + (b3 * (x - x0) * (x - x1) * (x - x2));
-
-        return imprimir(resultado);
+    public void calcular(JTextField txtTabla,JTextField txtX,JTable tabla,JLabel txtResultado,JLabel txtEcuacion) {
+        DecimalFormat formato = new DecimalFormat("0.000000");
+        //tabba.append("DIFERENCIAS DIVIDIDAS\n");
+        int g = Integer.parseInt(txtTabla.getText());
+        g += 1;
+        int g1 = g+1;
+        double v[] = new double[g];
+        double v1[] = new double[g];
+        
+        double m[][] = new double[g][g1];
+        
+        for(int i = 0; i < g ; i++)
+            for(int j = 0 ; j < 2 ; j++)
+                if(j==0)
+                    v[i] = Double.parseDouble(tabla.getValueAt(i,j).toString());
+                else
+                    v1[i] = Double.parseDouble(tabla.getValueAt(i,j).toString());
+        
+        for (int i = 0; i < g; i++) {
+            for (int j = 0; j < 2; j++) {
+                if (j==0) {
+                    m[i][j] = v[i];
+                }else{
+                    m[i][j] = v1[i];
+                }
+            }
+        }
+        
+        //tabba.append("x\tf[x]\n");
+        for (int i = 0; i < g; i++) {
+            //tabba.append(v[i]+"\t"+v1[i]+"\n");
+        }
+        
+        int i2 = 2;int k = 1;
+        int g2 = g;
+        double var = v1[0];
+        
+        for (int i = 0; i < g1; i++) {
+            for (int j = 0; j < g2-1; j++) {
+                double p = ((v1[j+1]-v1[j])/(v[j+k]-v[j]));
+                v1[j] = p;
+                m[j][i2] = p;
+            }i2++;
+            k++;
+            g2--;
+        }
+        
+        //tabba.append("\n\nImprimiendo la tabla\n");
+        
+        for (int i = 0; i < g; i++) {
+            for (int j = 0; j < g1; j++) {
+                //tabba.append(formato.format(m[i][j])+"\t");
+            }
+            //tabba.append("\n");
+        }
+        
+        //DefaultTableModel modelo = (DefaultTableModel) tabla2.getModel();
+        //modelo.setNumRows(g);
+        //modelo.setColumnCount(g1);
+        
+        for (int i = 0; i < g; i++) {
+            for (int j = 0; j < g1; j++) {
+                //tabla2.setValueAt(formato.format(m[i][j]), i, j);
+            }
+        }
+        double su = 0;
+        su += var; int k1 = 1;
+        //tabba.append("p(x) = "+var+" ");
+        double x1 = Double.parseDouble(txtX.getText());
+        String str = "f(x) = ";
+        for (int i = 2; i < g1; i++) {
+            str += "+ "+formato.format(m[0][i])+" *";
+            //tabba.append("+ "+formato.format(m[0][i])+" *");
+            double sul = 1;
+            for (int j = 0; j < k1; j++) {
+                sul = sul * (x1-v[j]);
+                if(j==k1-1){
+                    str += "("+x1+"-"+v[j]+")";
+                    //tabba.append("("+x1+"-"+v[j]+")");
+                }else{
+                    str += "("+x1+"-"+v[j]+") *";
+                    //tabba.append("("+x1+"-"+v[j]+") *");
+                }
+            }
+            txtEcuacion.setText(str);
+            sul = sul * m[0][i];
+            su = su + sul;
+            k1++;
+        }
+        txtResultado.setText(formato.format(su));
     }
-
-    private float calcularB1() {
-        b1 = (fx1 - fx0) / (x1 - x0);
-        return b1;
-    }
-
-    private float calcularB2() {
-        b2 = (((fx2 - fx1) / (x2 - x1)) - calcularB1()) / (x2 - x0);
-        return b2;
-    }
-
-    private float calcularB3() {
-        b3 = (((((fx3 - fx2) / (x3 - x2)) - ((fx2 - fx1) / (x2 - x1))) / (x3 - x1)) - calcularB2()) / (x3 - x0);
-        return b3;
-    }
-
-    private String imprimir(float funcion) {
-        String texto = "X\tX0\tX1\tX2\tX3\tf(X0)\tf(X1)\tf(X2)\tf(X3)\tb0\tb1\tb2\tb3\tf(X)";
-
-        texto += "\n" + formato.format(x) + "\t" + formato.format(x0) + "\t" + formato.format(x1)
-                + "\t" + formato.format(x2) + "\t" + formato.format(x3) + "\t" + formato.format(fx0) + "\t"
-                + formato.format(fx1) + "\t" + formato.format(fx2) + "\t" + formato.format(fx3) + "\t" + formato.format(b0)
-                + "\t" + formato.format(b1) + "\t" + formato.format(b2) + "\t" + formato.format(b3) + "\t" + formato.format(funcion);
-        return texto;
-    }
-
-    public String getResultado() {
-        return formato.format(resultado);
-    }
+    
+    
 }

@@ -7,7 +7,11 @@ package Interfaces;
 
 import Clases.metodos.InterpolacionNewton;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,10 +24,12 @@ public class frmInterpolacionNewton extends javax.swing.JFrame {
      */
     public frmInterpolacionNewton() {
         initComponents();
-        btnLimpiar.setEnabled(false);
-        txtAreaResultado.setEditable(false);
+        btnLimpiar.setEnabled(true);
+        btnInsertar.setEnabled(true);
         this.setLocationRelativeTo(null);
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/estadisticas.png")));
+        btnCalcular.setEnabled(false);
+        txtValorX.setEnabled(false);
     }
 
     /**
@@ -37,22 +43,20 @@ public class frmInterpolacionNewton extends javax.swing.JFrame {
 
         btnSalir = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
-        txtX0 = new javax.swing.JTextField();
-        txtX1 = new javax.swing.JTextField();
-        txtX2 = new javax.swing.JTextField();
-        txtX3 = new javax.swing.JTextField();
-        txtFx0 = new javax.swing.JTextField();
-        txtFx1 = new javax.swing.JTextField();
-        txtFx2 = new javax.swing.JTextField();
-        txtFx3 = new javax.swing.JTextField();
-        txtValorX = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtAreaResultado = new javax.swing.JTextArea();
-        btnLimpiar = new javax.swing.JButton();
-        btnCalcular = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        lblResultado = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        txtGrado = new javax.swing.JTextField();
+        txtValorX = new javax.swing.JTextField();
+        btnCalcular = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
+        btnInsertar = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        lblEcuacion = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         lblPrincipal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -68,7 +72,7 @@ public class frmInterpolacionNewton extends javax.swing.JFrame {
                 btnSalirActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 0, -1, -1));
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, -1, -1));
 
         btnRegresar.setBackground(new java.awt.Color(51, 51, 255));
         btnRegresar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -79,22 +83,47 @@ public class frmInterpolacionNewton extends javax.swing.JFrame {
                 btnRegresarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 0, -1, -1));
-        getContentPane().add(txtX0, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 140, -1));
-        getContentPane().add(txtX1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 140, -1));
-        getContentPane().add(txtX2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 140, -1));
-        getContentPane().add(txtX3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, 140, -1));
-        getContentPane().add(txtFx0, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, 140, -1));
-        getContentPane().add(txtFx1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, 140, -1));
-        getContentPane().add(txtFx2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, 140, -1));
-        getContentPane().add(txtFx3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 140, -1));
-        getContentPane().add(txtValorX, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 100, 140, -1));
+        getContentPane().add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 0, -1, -1));
 
-        txtAreaResultado.setColumns(20);
-        txtAreaResultado.setRows(5);
-        jScrollPane1.setViewportView(txtAreaResultado);
+        jPanel1.setBackground(null);
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Diferencias Divididas de Newton", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
+        jPanel1.setOpaque(false);
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 760, 110));
+        lblResultado.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblResultado.setForeground(java.awt.SystemColor.control);
+        lblResultado.setText("- ");
+        jPanel1.add(lblResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel4.setForeground(java.awt.SystemColor.control);
+        jLabel4.setText("Ingrese el Grado : ");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 40, -1, -1));
+
+        txtGrado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtGradoKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtGrado, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 30, 280, 30));
+
+        txtValorX.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtValorXKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtValorX, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 80, 280, 30));
+
+        btnCalcular.setBackground(new java.awt.Color(51, 51, 255));
+        btnCalcular.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnCalcular.setForeground(java.awt.SystemColor.control);
+        btnCalcular.setText("Calcular");
+        btnCalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalcularActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnCalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 150, 140, -1));
 
         btnLimpiar.setBackground(new java.awt.Color(51, 51, 255));
         btnLimpiar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -106,36 +135,56 @@ public class frmInterpolacionNewton extends javax.swing.JFrame {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, 140, -1));
+        jPanel1.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 150, 140, -1));
 
-        btnCalcular.setBackground(new java.awt.Color(51, 51, 255));
-        btnCalcular.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnCalcular.setForeground(java.awt.SystemColor.control);
-        btnCalcular.setText("Calcular");
-        btnCalcular.addActionListener(new java.awt.event.ActionListener() {
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "x", "f(x)"
+            }
+        ));
+        jScrollPane1.setViewportView(tabla);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 390, 110));
+
+        btnInsertar.setBackground(new java.awt.Color(51, 51, 255));
+        btnInsertar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnInsertar.setForeground(new java.awt.Color(255, 255, 255));
+        btnInsertar.setText("Insertar");
+        btnInsertar.setEnabled(false);
+        btnInsertar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCalcularActionPerformed(evt);
+                btnInsertarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 250, 140, -1));
-
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel3.setForeground(java.awt.SystemColor.control);
-        jLabel3.setText("Valor de X:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, -1, -1));
+        jPanel1.add(btnInsertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, 140, -1));
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel5.setForeground(java.awt.SystemColor.control);
-        jLabel5.setText("Funcion :");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 70, -1, -1));
+        jLabel5.setText("Valor de X:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel4.setForeground(java.awt.SystemColor.control);
-        jLabel4.setText("Numero : ");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, -1, -1));
+        lblEcuacion.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblEcuacion.setForeground(java.awt.SystemColor.control);
+        lblEcuacion.setText("-");
+        jPanel1.add(lblEcuacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 710, -1));
+
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel7.setForeground(java.awt.SystemColor.control);
+        jLabel7.setText("Resultado : ");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel8.setForeground(java.awt.SystemColor.control);
+        jLabel8.setText("Ecuación :");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 880, 270));
 
         lblPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo Principal.jpg"))); // NOI18N
-        getContentPane().add(lblPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 440));
+        getContentPane().add(lblPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 330));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -154,50 +203,60 @@ public class frmInterpolacionNewton extends javax.swing.JFrame {
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         // TODO add your handling code here:
-        limpiar();
+        frmInterpolacionNewton limpiar = new frmInterpolacionNewton();
+        limpiar.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
-        if(txtX0.getText().isEmpty()||txtX1.getText().isEmpty()||
-            txtX2.getText().isEmpty()||txtFx0.getText().isEmpty()||
-            txtFx1.getText().isEmpty()||txtFx2.getText().isEmpty()||
-            txtValorX.getText().isEmpty())
-
-        JOptionPane.showMessageDialog(null,"Termine De llenar los datos","ERROR",JOptionPane.WARNING_MESSAGE);
-
+        if(txtValorX.getText().isEmpty())
+            JOptionPane.showMessageDialog(null,"Ingrese valor de X","Advertencia",JOptionPane.WARNING_MESSAGE);
         else{
             try{
-                InterpolacionNewton calculos;
-                calculos = new InterpolacionNewton(Float.parseFloat(txtValorX.getText()),
-                    Float.parseFloat(txtX0.getText()),Float.parseFloat(txtX1.getText()),Float.parseFloat(txtX2.getText()),
-                    Float.parseFloat(txtX3.getText()),Float.parseFloat(txtFx0.getText()),Float.parseFloat(txtFx1.getText()),
-                    Float.parseFloat(txtFx2.getText()),Float.parseFloat(txtFx3.getText()));
-
-                txtAreaResultado.setText(calculos.calcular());
-
-                txtX0.setEnabled(false);
-                txtX1.setEnabled(false);
-                txtX2.setEnabled(false);
-                txtX3.setEnabled(false);
-
-                txtFx0.setEnabled(false);
-                txtFx1.setEnabled(false);
-                txtFx2.setEnabled(false);
-                txtFx3.setEnabled(false);
-
+                InterpolacionNewton calculos = new InterpolacionNewton();
+                calculos.calcular(txtGrado, txtValorX, tabla, lblResultado, lblEcuacion);
+                tabla.setEnabled(false);
                 txtValorX.setEnabled(false);
-
                 btnCalcular.setEnabled(false);
-                btnLimpiar.setEnabled(true);
-                JOptionPane.showMessageDialog(null,"Valor de f(X) : "+calculos.getResultado(),"Valor",JOptionPane.INFORMATION_MESSAGE);
             }catch(Exception e){
-                frmInterpolacionNewton objInicio = new frmInterpolacionNewton();
-                objInicio.setVisible(true);
-                this.dispose();
-                JOptionPane.showMessageDialog(null,"Error en los calculos","ERROR",JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Error en los calculos","ERROR",JOptionPane.ERROR_MESSAGE);
+                btnLimpiarActionPerformed(evt);
             }
         }
     }//GEN-LAST:event_btnCalcularActionPerformed
+
+    private void btnInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarActionPerformed
+        // TODO add your handling code here:
+        if(txtGrado.getText().isEmpty())
+            JOptionPane.showMessageDialog(null,"Inserte un grado valido","ADVERTENCIA",JOptionPane.WARNING_MESSAGE);
+        else{
+            try{
+                DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
+                int g = Integer.parseInt(txtGrado.getText());
+                g = g+1;
+                modelo.setRowCount(g);
+                modelo.setColumnCount(2);
+                txtGrado.setEnabled(false);
+                
+                txtValorX.setEnabled(true);
+                btnCalcular.setEnabled(true);
+                btnInsertar.setEnabled(false);
+            }catch(Exception e){
+                    JOptionPane.showMessageDialog(null, "Error en el grado","ERROR",JOptionPane.ERROR_MESSAGE);
+                    btnLimpiarActionPerformed(evt);
+            }
+        }
+    }//GEN-LAST:event_btnInsertarActionPerformed
+
+    private void txtGradoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGradoKeyTyped
+        // TODO add your handling code here:
+        validar(txtGrado,evt);
+    }//GEN-LAST:event_txtGradoKeyTyped
+
+    private void txtValorXKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorXKeyTyped
+        // TODO add your handling code here:
+        validarX(txtValorX,evt);
+    }//GEN-LAST:event_txtValorXKeyTyped
 
     /**
      * @param args the command line arguments
@@ -236,54 +295,62 @@ public class frmInterpolacionNewton extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCalcular;
+    private javax.swing.JButton btnInsertar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblEcuacion;
     private javax.swing.JLabel lblPrincipal;
-    private javax.swing.JTextArea txtAreaResultado;
-    private javax.swing.JTextField txtFx0;
-    private javax.swing.JTextField txtFx1;
-    private javax.swing.JTextField txtFx2;
-    private javax.swing.JTextField txtFx3;
+    private javax.swing.JLabel lblResultado;
+    private javax.swing.JTable tabla;
+    private javax.swing.JTextField txtGrado;
     private javax.swing.JTextField txtValorX;
-    private javax.swing.JTextField txtX0;
-    private javax.swing.JTextField txtX1;
-    private javax.swing.JTextField txtX2;
-    private javax.swing.JTextField txtX3;
     // End of variables declaration//GEN-END:variables
 
-    private void limpiar() {
-        txtX0.setEnabled(true);
-        txtX1.setEnabled(true);
-        txtX2.setEnabled(true);
-        txtX3.setEnabled(true);
-                
-        txtFx0.setEnabled(true);
-        txtFx1.setEnabled(true);
-        txtFx2.setEnabled(true);
-        txtFx3.setEnabled(true);
-                
-        txtValorX.setEnabled(true);
-                
-        btnCalcular.setEnabled(true);
-        btnLimpiar.setEnabled(false);
-        
-        txtX0.setText("");
-        txtX1.setText("");
-        txtX2.setText("");
-        txtX3.setText("");
-        
-        txtFx0.setText("");
-        txtFx1.setText("");
-        txtFx2.setText("");
-        txtFx3.setText("");
-        
-        txtValorX.setText("");
-        
-        txtAreaResultado.setText("");
+    public void validar(JTextField txt, KeyEvent evt) {
+
+        char car = evt.getKeyChar();
+        int count = 0;
+
+
+        if (( car != '1' && car != '2' && car != '3' && car != '4' && car != '5'
+                && car != '6' && car != '7' && car != '8' && car != '9')) {
+            evt.consume();
+        }
     }
+    
+    public void validarX(JTextField txt, KeyEvent evt){
+        char car = evt.getKeyChar();
+        char text[];
+        int count = 0;
+        text = txt.getText().toCharArray();
+        for (int i = 0; i < text.length; i++) {
+            if (text[i] == '.') {
+                count++;
+            }
+        }
+        if (count >= 1 && evt.getKeyChar() == '.') {
+            evt.consume();
+        }
+
+        for (int i = 0; i < text.length; i++) {
+            if (text[i] == '-') {
+                count++;
+            }
+        }
+        if (count >= 1 && evt.getKeyChar() == '-') {
+            evt.consume();
+        }
+        if ((car != '0' && car != '1' && car != '2' && car != '3' && car != '4' && car != '5'
+                && car != '6' && car != '7' && car != '8' && car != '9' && car != '-' && car != '.')) {
+            evt.consume();
+        }
+    }
+
 }

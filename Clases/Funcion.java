@@ -12,6 +12,13 @@ public class Funcion {
         this.expresion = expresion;
     }
 
+    public Funcion() {
+    }
+    
+    public void setFuncion(String funcion){
+        this.expresion = funcion;
+    }
+
     
     public double evaluar(double x){ 
         JEP j = new JEP(); 

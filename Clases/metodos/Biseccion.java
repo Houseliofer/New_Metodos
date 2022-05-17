@@ -119,6 +119,15 @@ public class Biseccion {
             evt.consume();
         }
 
+        for (int i = 0; i < text.length; i++) {
+            if (text[i] == '-') {
+                count++;
+            }
+        }
+        if (count >= 1 && evt.getKeyChar() == '-') {
+            evt.consume();
+        }
+        
         if ((car != '0' && car != '1' && car != '2' && car != '3' && car != '4' && car != '5'
                 && car != '6' && car != '7' && car != '8' && car != '9' && car != '-' && car != '.')) {
             evt.consume();

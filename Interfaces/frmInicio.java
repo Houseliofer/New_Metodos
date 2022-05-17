@@ -272,7 +272,9 @@ public class frmInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBiseccionActionPerformed
 
     private void btnSecanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSecanteActionPerformed
-        
+        frmSecante obj = new frmSecante();
+        obj.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnSecanteActionPerformed
 
     private void btnNewtonMultivariableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewtonMultivariableActionPerformed
