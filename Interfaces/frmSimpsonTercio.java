@@ -7,9 +7,8 @@ package Interfaces;
 
 import Clases.Funcion;
 import Clases.frame_panel;
-import Clases.metodos.Trapecio;
+import Clases.metodos.SimpsonTercio;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -18,14 +17,13 @@ import javax.swing.JTextField;
  *
  * @author house
  */
-public class frmTrapecio extends javax.swing.JFrame {
+public class frmSimpsonTercio extends javax.swing.JFrame {
 
     frame_panel panel;
-
     /**
-     * Creates new form frmTrapecio
+     * Creates new form frmSimpsonTercio
      */
-    public frmTrapecio() {
+    public frmSimpsonTercio() {
         initComponents();
         panel = new frame_panel(pnlGrafica, btnGraficar, txtFuncion, txtValorA, txtValorB);
         this.setLocationRelativeTo(null);
@@ -68,15 +66,15 @@ public class frmTrapecio extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTabla = new javax.swing.JTable();
-        btnRegresar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Método del Trapecio", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Metodo de Simpson 1/3", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
         jPanel1.setOpaque(false);
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -203,17 +201,6 @@ public class frmTrapecio extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 810, 390));
 
-        btnRegresar.setBackground(new java.awt.Color(51, 51, 255));
-        btnRegresar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnRegresar.setForeground(java.awt.SystemColor.control);
-        btnRegresar.setText("Regresar");
-        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegresarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 0, -1, -1));
-
         btnSalir.setBackground(new java.awt.Color(153, 0, 0));
         btnSalir.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnSalir.setForeground(new java.awt.Color(255, 255, 255));
@@ -225,23 +212,22 @@ public class frmTrapecio extends javax.swing.JFrame {
         });
         getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 0, -1, -1));
 
+        btnRegresar.setBackground(new java.awt.Color(51, 51, 255));
+        btnRegresar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnRegresar.setForeground(java.awt.SystemColor.control);
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 0, -1, -1));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo Principal.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 840, 430));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        // TODO add your handling code here:
-        frmInicio objInicio = new frmInicio();
-        objInicio.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnRegresarActionPerformed
-
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnGraficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarActionPerformed
         habilitarCampos();
@@ -249,21 +235,21 @@ public class frmTrapecio extends javax.swing.JFrame {
 
     private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
         if (txtValorA.getText().isEmpty() || txtValorB.getText().isEmpty()
-                || txtN.getText().isEmpty()) {
+            || txtN.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Porfavor Ingrese todos los datos", "Advertencia", JOptionPane.WARNING_MESSAGE);
         } else {
             try {
                 Funcion f = new Funcion(txtFuncion.getText());
-                Trapecio calculos = new Trapecio();
+                SimpsonTercio calculos = new SimpsonTercio();
 
                 txtResultado.setText(
-                        calculos.calcular(
-                                f,
-                                Integer.parseInt(txtN.getText()),
-                                Float.parseFloat(txtValorA.getText()),
-                                Float.parseFloat(txtValorB.getText()),
-                                tblTabla
-                        )
+                    calculos.calcular(
+                        f,
+                        Integer.parseInt(txtN.getText()),
+                        Float.parseFloat(txtValorA.getText()),
+                        Float.parseFloat(txtValorB.getText()),
+                        tblTabla
+                    )
                 );
 
                 btnCalcular.setEnabled(false);
@@ -272,9 +258,9 @@ public class frmTrapecio extends javax.swing.JFrame {
                 txtValorA.setEnabled(false);
                 txtValorB.setEnabled(false);
                 txtN.setEnabled(false);
-                
+
             } catch (Exception e) {
-                frmTrapecio obj = new frmTrapecio();
+                frmSimpsonTercio obj = new frmSimpsonTercio();
                 obj.setVisible(true);
                 this.dispose();
                 JOptionPane.showMessageDialog(null, "Error en los calculos", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -283,7 +269,7 @@ public class frmTrapecio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCalcularActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        frmTrapecio obj = new frmTrapecio();
+        frmSimpsonTercio obj = new frmSimpsonTercio();
         obj.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnLimpiarActionPerformed
@@ -300,12 +286,24 @@ public class frmTrapecio extends javax.swing.JFrame {
 
     private void txtNKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNKeyTyped
         // TODO add your handling code here:
-        validar(txtN, evt);
+        validarPar(txtN, evt);
     }//GEN-LAST:event_txtNKeyTyped
 
     private void txtResultadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtResultadoKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_txtResultadoKeyTyped
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        // TODO add your handling code here:
+        frmInicio objInicio = new frmInicio();
+        objInicio.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -324,20 +322,20 @@ public class frmTrapecio extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmTrapecio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmSimpsonTercio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmTrapecio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmSimpsonTercio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmTrapecio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmSimpsonTercio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmTrapecio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmSimpsonTercio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmTrapecio().setVisible(true);
+                new frmSimpsonTercio().setVisible(true);
             }
         });
     }
@@ -379,7 +377,6 @@ public class frmTrapecio extends javax.swing.JFrame {
             txtN.setEnabled(true);
         }
     }
-
     public void validar(JTextField txt, KeyEvent evt) {
 
         char car = evt.getKeyChar();
@@ -397,6 +394,25 @@ public class frmTrapecio extends javax.swing.JFrame {
 
         if ((car != '0' && car != '1' && car != '2' && car != '3' && car != '4' && car != '5'
                 && car != '6' && car != '7' && car != '8' && car != '9' && car != '-' && car != '.')) {
+            evt.consume();
+        }
+    }
+    public void validarPar(JTextField txt,KeyEvent evt){
+        char car = evt.getKeyChar();
+        char text[];
+        int count = 0;
+        text = txt.getText().toCharArray();
+        for (int i = 0; i < text.length; i++) {
+            if (text[i] == '.') {
+                count++;
+            }
+        }
+        if (count >= 1 && evt.getKeyChar() == '.') {
+            evt.consume();
+        }
+
+        if ((car != '0' && car != '1' && car != '2' && car != '4'
+                && car != '6' && car != '8' && car != '9')) {
             evt.consume();
         }
     }

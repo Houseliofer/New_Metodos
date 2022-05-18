@@ -23,6 +23,7 @@ public class frmInicio extends javax.swing.JFrame {
         btnGaussSeidel = new javax.swing.JButton();
         btnRegresionhCuadratica = new javax.swing.JButton();
         btnTrapecio = new javax.swing.JButton();
+        btnSimpsonTercio = new javax.swing.JButton();
         btnInterpolacionLineal = new javax.swing.JButton();
         btnLagrange = new javax.swing.JButton();
         btnInterpolacionNewton = new javax.swing.JButton();
@@ -106,7 +107,7 @@ public class frmInicio extends javax.swing.JFrame {
                 btnNewtonMultivariableActionPerformed(evt);
             }
         });
-        getContentPane().add(btnNewtonMultivariable, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, 300, -1));
+        getContentPane().add(btnNewtonMultivariable, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 300, -1));
 
         btnRegresionLineal.setBackground(new java.awt.Color(0, 0, 0));
         btnRegresionLineal.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -139,7 +140,7 @@ public class frmInicio extends javax.swing.JFrame {
                 btnGaussSeidelActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGaussSeidel, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, 300, -1));
+        getContentPane().add(btnGaussSeidel, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, 300, -1));
 
         btnRegresionhCuadratica.setBackground(new java.awt.Color(0, 0, 0));
         btnRegresionhCuadratica.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -161,7 +162,18 @@ public class frmInicio extends javax.swing.JFrame {
                 btnTrapecioActionPerformed(evt);
             }
         });
-        getContentPane().add(btnTrapecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, 300, -1));
+        getContentPane().add(btnTrapecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 240, 300, -1));
+
+        btnSimpsonTercio.setBackground(new java.awt.Color(0, 0, 0));
+        btnSimpsonTercio.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnSimpsonTercio.setForeground(new java.awt.Color(255, 255, 255));
+        btnSimpsonTercio.setText("Metodo de Simpson 1/3");
+        btnSimpsonTercio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSimpsonTercioActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSimpsonTercio, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, 300, -1));
 
         btnInterpolacionLineal.setBackground(new java.awt.Color(0, 0, 0));
         btnInterpolacionLineal.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -205,7 +217,7 @@ public class frmInicio extends javax.swing.JFrame {
                 btnGaussJordanActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGaussJordan, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, 300, -1));
+        getContentPane().add(btnGaussJordan, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, 300, -1));
 
         btnGaussiana.setBackground(new java.awt.Color(0, 0, 0));
         btnGaussiana.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -216,7 +228,7 @@ public class frmInicio extends javax.swing.JFrame {
                 btnGaussianaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGaussiana, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 240, 300, -1));
+        getContentPane().add(btnGaussiana, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, 300, -1));
 
         btnInstrucciones.setBackground(new java.awt.Color(0, 255, 51));
         btnInstrucciones.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -340,6 +352,12 @@ public class frmInicio extends javax.swing.JFrame {
         obj.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnTrapecioActionPerformed
+
+    private void btnSimpsonTercioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpsonTercioActionPerformed
+        frmSimpsonTercio obj = new frmSimpsonTercio();
+        obj.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSimpsonTercioActionPerformed
 public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -388,6 +406,7 @@ public static void main(String args[]) {
     private javax.swing.JButton btnRegresionhCuadratica;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnSecante;
+    private javax.swing.JButton btnSimpsonTercio;
     private javax.swing.JButton btnTrapecio;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
