@@ -74,7 +74,7 @@ public class frmSimpsonTercio extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Metodo de Simpson 1/3", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Metodo de Simpson 1/3", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel1.setOpaque(false);
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -236,8 +236,13 @@ public class frmSimpsonTercio extends javax.swing.JFrame {
     private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
         if (txtValorA.getText().isEmpty() || txtValorB.getText().isEmpty()
             || txtN.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Porfavor Ingrese todos los datos", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese todos los datos.", "Advertencia", JOptionPane.WARNING_MESSAGE);
         } else {
+            float residuo;
+            residuo = Float.parseFloat(txtN.getText())%2;
+            if(residuo!=0)
+                JOptionPane.showMessageDialog(null,"Ingrese N par","ADVERTENCIA",JOptionPane.WARNING_MESSAGE);
+            else{
             try {
                 Funcion f = new Funcion(txtFuncion.getText());
                 SimpsonTercio calculos = new SimpsonTercio();
@@ -265,6 +270,7 @@ public class frmSimpsonTercio extends javax.swing.JFrame {
                 this.dispose();
                 JOptionPane.showMessageDialog(null, "Error en los calculos", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
+            }
         }
     }//GEN-LAST:event_btnCalcularActionPerformed
 
@@ -287,6 +293,9 @@ public class frmSimpsonTercio extends javax.swing.JFrame {
     private void txtNKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNKeyTyped
         // TODO add your handling code here:
         validarPar(txtN, evt);
+        
+        
+        
     }//GEN-LAST:event_txtNKeyTyped
 
     private void txtResultadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtResultadoKeyTyped

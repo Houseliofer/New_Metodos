@@ -296,7 +296,9 @@ public class frmInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNewtonMultivariableActionPerformed
 
     private void btnRegresionLinealActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresionLinealActionPerformed
-        
+        frmRegresionLineal obj = new frmRegresionLineal();
+        obj.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnRegresionLinealActionPerformed
 
     private void btnInterpolacionCuadraticaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInterpolacionCuadraticaActionPerformed
@@ -337,7 +339,9 @@ public class frmInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGaussJordanActionPerformed
 
     private void btnGaussianaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGaussianaActionPerformed
-        
+        frmEliminasion obj = new frmEliminasion();
+        obj.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnGaussianaActionPerformed
 
     private void btnInstruccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInstruccionesActionPerformed
