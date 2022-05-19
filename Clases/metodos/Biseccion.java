@@ -8,11 +8,6 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Agustin Estrada_
- */
-
 public class Biseccion {
 
     private Funcion funcion;
