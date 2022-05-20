@@ -5,6 +5,7 @@
  */
 package Interfaces;
 
+import java.awt.Toolkit;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class frmEliminasion extends javax.swing.JFrame {static double matriz[][]
     public frmEliminasion() {
         initComponents();
         this.setLocationRelativeTo(null);
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/estadisticas.png")));
     }
 
     /**
