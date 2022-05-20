@@ -335,7 +335,9 @@ public class frmInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInterpolacionNewtonActionPerformed
 
     private void btnGaussJordanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGaussJordanActionPerformed
-        
+        frmGaussJordan obj= new frmGaussJordan();
+        obj.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnGaussJordanActionPerformed
 
     private void btnGaussianaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGaussianaActionPerformed
