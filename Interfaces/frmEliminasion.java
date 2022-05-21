@@ -3,12 +3,16 @@ package Interfaces;
 
 
 import java.awt.Toolkit;
-import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
+
 import Clases.metodos.EliminacionGauss;
+
+
+import Clases.metodos.EliminacionGauss;
+
 public class frmEliminasion extends javax.swing.JFrame {
     EliminacionGauss obje = new EliminacionGauss();
     /**

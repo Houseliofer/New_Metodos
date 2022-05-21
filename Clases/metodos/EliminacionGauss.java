@@ -29,7 +29,7 @@ public class EliminacionGauss {
     
     public static void inicio(JTextArea txta, JTextField txtNo, JButton btncalcular, JTextArea txtasoluciones,JTextArea txtasolu){
          
-        int i;
+        int i,vectorC;
         double[] resultado;
         ArrayList numero = new ArrayList<String>();
         ArrayList aux = new ArrayList<String>();
@@ -50,7 +50,7 @@ public class EliminacionGauss {
                 String p2 = pa1[j];
                 
             for (int h = 0; h < NoIncog; h++) 
-                    sistema[j][h] = Integer.parseInt(String.valueOf(pa1[h]));
+                    sistema[j][h] = Double.parseDouble(String.valueOf(pa1[h]));
                 
             }
             for (String tex : pa[i].split("\\s")) {
@@ -61,12 +61,9 @@ public class EliminacionGauss {
         matriz = sistema;
         resultado = new double[aux.size()];
         for (i = 0; i < resultado.length; i++) {
-            resultado[i] = Integer.parseInt(String.valueOf(aux.get(i)));
+            resultado[i] = Double.parseDouble(String.valueOf(aux.get(i)));
         }
-        
-        
         igualacion= resultado;
-
         eliminacion(txtasoluciones);
         sustHaciaAtras();
         soluciones(txtasolu);
@@ -189,7 +186,6 @@ public class EliminacionGauss {
 
         char car = evt.getKeyChar();
         char text[];
-        int count = 0;
         text = txt.getText().toCharArray();
         if ((car != '0' && car != '1' && car != '2' && car != '3' && car != '4' && car != '5'
                 && car != '6' && car != '7' && car != '8' && car != '9')) {
@@ -200,10 +196,9 @@ public class EliminacionGauss {
 
         char car = evt.getKeyChar();
         char text[];
-        int count = 0;
         text = txt.getText().toCharArray();
         if ((car != '0' && car != '1' && car != '2' && car != '3' && car != '4' && car != '5'
-                && car != '6' && car != '7' && car != '8' && car != '9' && car!=' ' && car!='-')) {
+                && car != '6' && car != '7' && car != '8' && car != '9' && car!=' ' && car!='-' && car!='.')) {
             evt.consume();
         }
     }

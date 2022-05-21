@@ -5,25 +5,14 @@
  */
 package Interfaces;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.Arrays;
-import javax.swing.table.DefaultTableModel;
+import Clases.metodos.GausSeidel;
 
 /**
  *
  * @author bebo_
  */
 public class frmSeidel extends javax.swing.JFrame {
-    final static int MAXN=10;
-    static double a[][]=new double[MAXN][MAXN];
-    static double error;//escribir el error
-    static double x1[]=new double[MAXN];// Se usa para guardar el valor para la iteración
-    static double errr;
-    static double err_anterior=0;
-    static int numIncog;
-     
-        
+    GausSeidel obje = new GausSeidel();
     /**
      * Creates new form frmSeidel
      */
@@ -49,7 +38,7 @@ public class frmSeidel extends javax.swing.JFrame {
         txtsistema = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         txtError = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btncalcular = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbliteracion = new javax.swing.JTable();
@@ -58,6 +47,7 @@ public class frmSeidel extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         txtaSolu = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
+        btnborrar = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -76,11 +66,28 @@ public class frmSeidel extends javax.swing.JFrame {
 
         jLabel1.setText("Numero de incognitas");
 
+        txtincog.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtincogKeyTyped(evt);
+            }
+        });
+
         txtsistema.setColumns(20);
         txtsistema.setRows(5);
+        txtsistema.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtsistemaKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(txtsistema);
 
         jLabel2.setText("Error");
+
+        txtError.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtErrorKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -111,10 +118,10 @@ public class frmSeidel extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jButton1.setText("Calcular");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btncalcular.setText("Calcular");
+        btncalcular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btncalcularActionPerformed(evt);
             }
         });
 
@@ -160,6 +167,13 @@ public class frmSeidel extends javax.swing.JFrame {
 
         jLabel3.setText("soluciones");
 
+        btnborrar.setText("Borrar");
+        btnborrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnborrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -172,13 +186,15 @@ public class frmSeidel extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(105, 105, 105)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnborrar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btncalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(143, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -187,7 +203,9 @@ public class frmSeidel extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btncalcular)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnborrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -195,82 +213,39 @@ public class frmSeidel extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(250, Short.MAX_VALUE))
+                .addContainerGap(249, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btncalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncalcularActionPerformed
         // TODO add your handling code here:
-        String texto="";
-        DefaultTableModel modelo= (DefaultTableModel) tbliteracion.getModel();
-         DefaultTableModel modelo2= (DefaultTableModel) tbliteracion2.getModel();
-        numIncog=Integer.parseInt(txtincog.getText());
-        error=Double.parseDouble(txtError.getText());
-        Object[] fila = new Object[numIncog*3];
-        String[] pa = txtsistema.getText().split("\n");
-        for(int i=0;i<numIncog;i++){
-            String p1=pa[i];
-            //System.out.println(pa[i]);
-            
-            String [] pa2 = pa[i].split(" ");
-            for(int j=0; j<numIncog+1;j++){
-                String p2=pa2[j];
-                a[i][j] = Double.parseDouble(String.valueOf(pa2[j]));
-            }
-         }
-        
-               modelo.addColumn("No.");
-          
-        for(int i=0;(i<numIncog);i++){
-               modelo.addColumn("x"+(i+1));
-          }
-           for(int i=0;(i<numIncog);i++){
-            modelo2.addColumn("Xn"+(i+1));
-           }
-           for(int i=0;(i<numIncog);i++){
-            modelo2.addColumn("Error"+(i+1));
-           }
-           modelo.setRowCount(0);
-           modelo2.setRowCount(0);
-        for(int i=0;i<numIncog;i++){
-            //x1[i]=sc.nextDouble();
-            x1[i]=0;
-            fila[0]=1;
-            fila[(i+1)]=x1[i];
-            
-        }
-        
-         modelo.addRow(fila);
-         tbliteracion.setModel(modelo);
-        
-        for(int i=0;i<numIncog;i++){// Escribe el sistema de ecuaciones como un sistema equivalente de ecuaciones
-            for(int j=0;j<=numIncog;j++){
-                if(j<numIncog&&j!=i){
-                    a[i][j]=-(a[i][j]/a[i][i]);
-                }else if(j==numIncog){
-                    a[i][j]=(a[i][j]/a[i][i]);
-                }
-            }
-            a[i][i]=0;
-        }
-        
-        int i=0;
-        do{
-           diedai();
-            i++;
-           
-        }while(error<errr && error<errr);
-         double inicial[] =new double[i];
-        for(i=1;i<inicial.length+1;i++){
-            modelo.setValueAt(i+1, i,0);
-        }
-        for(i=0;i<numIncog;i++)
-            texto+="x"+(i+1)+"= "+redondear(x1[i])+"\n";
-        
-        txtaSolu.setText(texto);
-    }//GEN-LAST:event_jButton1ActionPerformed
+       
+       obje.inicio(tbliteracion, tbliteracion2, txtincog, txtError, txtsistema, txtaSolu, btncalcular);
+    }//GEN-LAST:event_btncalcularActionPerformed
+
+    private void txtincogKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtincogKeyTyped
+        // TODO add your handling code here:
+        obje.validar(txtincog, evt);
+    }//GEN-LAST:event_txtincogKeyTyped
+
+    private void txtErrorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtErrorKeyTyped
+        // TODO add your handling code here:
+        obje.validarError(txtError, evt);
+    }//GEN-LAST:event_txtErrorKeyTyped
+
+    private void txtsistemaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtsistemaKeyTyped
+        // TODO add your handling code here:
+        obje.validarArea(txtsistema, evt);
+    }//GEN-LAST:event_txtsistemaKeyTyped
+
+    private void btnborrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnborrarActionPerformed
+        // TODO add your handling code here:
+        frmSeidel objefrm = new frmSeidel();
+        objefrm.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnborrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -308,7 +283,8 @@ public class frmSeidel extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnborrar;
+    private javax.swing.JButton btncalcular;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -327,43 +303,4 @@ public class frmSeidel extends javax.swing.JFrame {
     private javax.swing.JTextField txtincog;
     private javax.swing.JTextArea txtsistema;
     // End of variables declaration//GEN-END:variables
-static void diedai(){
-          DefaultTableModel modelo= (DefaultTableModel) tbliteracion.getModel();
-          DefaultTableModel modelo2= (DefaultTableModel) tbliteracion2.getModel();
-           
-           Object[] fila = new Object[numIncog*3];
-           Object[] fila2 = new Object[numIncog*3];
-        for(int i=0;(i<numIncog);i++){
-             double temp=0;
-            for(int j=0;j<numIncog;j++){
-                temp+=x1[j]*a[i][j];
-            }
-            
-            temp+=a[i][numIncog];//valor anterior de las x
-            fila[(i+1)]=redondear(temp);
-            
-            errr=(Math.abs((x1[i]-temp)/x1[i]))*100;
-            
-            x1[i]=temp;
-            fila2[i]=redondear(x1[i]);
-               
-            //filas del error    
-            if(Double.isInfinite(errr))
-                fila2[i+numIncog]=100;
-            else
-            fila2[i+numIncog]=redondear(errr);
-            
-        }
-        
-        
-        modelo.addRow(fila);
-        modelo2.addRow(fila2);
-        tbliteracion.setModel(modelo);
-        tbliteracion2.setModel(modelo2);
-        
-    }
-public static double redondear(double valor){
-        BigDecimal bd = new BigDecimal(valor).setScale(6,RoundingMode.HALF_UP);
-        return bd.doubleValue();
-    }
 }
