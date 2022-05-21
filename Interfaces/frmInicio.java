@@ -314,7 +314,9 @@ public class frmInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGaussSeidelActionPerformed
 
     private void btnRegresionhCuadraticaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresionhCuadraticaActionPerformed
-        
+        frmRegresionCuadratica obj = new frmRegresionCuadratica();
+        obj.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnRegresionhCuadraticaActionPerformed
 
     private void btnInterpolacionLinealActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInterpolacionLinealActionPerformed
