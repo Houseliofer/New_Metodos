@@ -134,7 +134,7 @@ public class RegresionLineal {
                 r = (float) Math.sqrt((sumaSt - sumaSr) / sumaSt);
 
                 if (!Double.isNaN(r) || !Double.isNaN(a0) || !Double.isNaN(a1)) {
-                    ecuacion = String.valueOf(redondear(a0)) + "+" + String.valueOf(redondear(a1)) + "x";
+                    ecuacion = caden(a0,a1);
                     lblPromeX.setText(String.valueOf(redondear(promeX)));
                     lblPromeY.setText(String.valueOf(redondear(promeY)));
                     txtecua.setText(ecuacion);
@@ -171,5 +171,20 @@ public class RegresionLineal {
     public double redondear(float valor){
         BigDecimal bd = new BigDecimal(valor).setScale(6,RoundingMode.HALF_UP);
         return bd.doubleValue();
+    }
+    public String caden (float a0,float a1){
+        String ecuacion="";
+        if(a0<0 && a1<0)
+            ecuacion=String.valueOf(redondear(a0)) + "" + String.valueOf(redondear(a1)) + "x";
+        else 
+            if(a0<0 && a1>0)
+                ecuacion=String.valueOf(redondear(a0)) +"+" + String.valueOf(redondear(a1)) + "x";
+            else 
+                if(a0>0 && a1<0)
+                    ecuacion=String.valueOf(redondear(a0)) +"-" + String.valueOf(redondear(a1)) + "x";
+                else 
+                    if(a0>0 && a1>0)
+                        ecuacion=String.valueOf(redondear(a0)) + "+" + String.valueOf(redondear(a1)) + "x";
+        return ecuacion;
     }
 }

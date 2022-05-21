@@ -6,6 +6,18 @@
 package Interfaces;
 
 import Clases.metodos.EliminacionGauss;
+import java.awt.Toolkit;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.Arrays;
+import javax.swing.JOptionPane;
+
+import Clases.metodos.EliminacionGauss;
+
+import Clases.metodos.EliminacionGauss;
+
+import Clases.metodos.EliminacionGauss;
 
 /**
  *
@@ -19,6 +31,7 @@ public class frmEliminasion extends javax.swing.JFrame {
     public frmEliminasion() {
         initComponents();
         this.setLocationRelativeTo(null);
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/estadisticas.png")));
     }
 
     /**
