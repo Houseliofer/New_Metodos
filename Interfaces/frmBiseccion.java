@@ -8,6 +8,7 @@ import Clases.frame_panel;
 import Clases.metodos.Biseccion;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
+//hola padrino como estas ?
 
 /**
  *
