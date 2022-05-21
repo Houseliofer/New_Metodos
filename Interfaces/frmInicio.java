@@ -308,7 +308,9 @@ public class frmInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInterpolacionCuadraticaActionPerformed
 
     private void btnGaussSeidelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGaussSeidelActionPerformed
-        
+        frmSeidel obj = new frmSeidel();
+        obj.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnGaussSeidelActionPerformed
 
     private void btnRegresionhCuadraticaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresionhCuadraticaActionPerformed

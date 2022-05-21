@@ -9,12 +9,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
 import Clases.metodos.EliminacionGauss;
-
-
-/**
- *
- * @author bebo_
- */
 public class frmEliminasion extends javax.swing.JFrame {
     EliminacionGauss obje = new EliminacionGauss();
     /**
