@@ -88,10 +88,10 @@ public class GausSeidel {
                     bandera = false;
                     diedai(tbliteracion, tbliteracion2);
                     i++;
-                    for (int j = 0; j < errr.length; j++) {
+                    for (int j = 0; j < errr.length; j++) 
                         if(errr[j]>error)
                             bandera = true;
-                    }
+                    
                 } while (bandera);
                 double inicial[] = new double[i];
                 for (i = 1; i < inicial.length + 1; i++) {
@@ -128,7 +128,7 @@ public class GausSeidel {
             temp += a[i][numIncog];//valor anterior de las x
             fila[(i + 1)] = redondear(temp);
             errr[i] = (Math.abs((x1[i] - temp) / x1[i])) * 100;
-            System.out.println(errr[i]);
+            //System.out.println(errr[i]);
 
             x1[i] = temp;
             fila2[i] = redondear(x1[i]);
