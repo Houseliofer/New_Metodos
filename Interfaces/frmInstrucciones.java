@@ -5,7 +5,10 @@
  */
 package Interfaces;
 
+import java.awt.Desktop;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
 
 /**
  *
@@ -119,4 +122,5 @@ public class frmInstrucciones extends javax.swing.JFrame {
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
+     
 }
