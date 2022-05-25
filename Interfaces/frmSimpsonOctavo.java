@@ -7,6 +7,7 @@ package Interfaces;
 
 import Clases.Funcion;
 import Clases.frame_panel;
+import Clases.metodos.SimpsonOctavo;
 import Clases.metodos.SimpsonTercio;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
@@ -17,14 +18,14 @@ import javax.swing.JTextField;
  *
  * @author house
  */
-public class frmSimpsonTercio extends javax.swing.JFrame {
+public class frmSimpsonOctavo extends javax.swing.JFrame {
 
     frame_panel panel;
 
     /**
      * Creates new form frmSimpsonTercio
      */
-    public frmSimpsonTercio() {
+    public frmSimpsonOctavo() {
         initComponents();
         panel = new frame_panel(pnlGrafica, btnGraficar, txtFuncion, txtValorA, txtValorB);
         this.setLocationRelativeTo(null);
@@ -75,7 +76,7 @@ public class frmSimpsonTercio extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Metodo de Simpson 1/3", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Metodo de Simpson 3/8", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel1.setOpaque(false);
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -240,20 +241,20 @@ public class frmSimpsonTercio extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Por favor, ingrese todos los datos.", "Advertencia", JOptionPane.WARNING_MESSAGE);
         } else {
             float residuo;
-            residuo = Float.parseFloat(txtN.getText()) % 2;
+            residuo = Float.parseFloat(txtN.getText()) % 3;
             if (residuo != 0) {
-                JOptionPane.showMessageDialog(null, "Ingrese N par", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Ingrese N multiplo de 3", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
             } else {
                 try {
                     Funcion f = new Funcion(txtFuncion.getText());
-                    SimpsonTercio calculos = new SimpsonTercio();
+                    SimpsonOctavo calculos = new SimpsonOctavo();
 
                     txtResultado.setText(
                             calculos.calcular(
                                     f,
                                     Integer.parseInt(txtN.getText()),
-                                    Float.parseFloat(txtValorA.getText()),
-                                    Float.parseFloat(txtValorB.getText()),
+                                    Double.parseDouble(txtValorA.getText()),
+                                    Double.parseDouble(txtValorB.getText()),
                                     tblTabla
                             )
                     );
@@ -266,17 +267,17 @@ public class frmSimpsonTercio extends javax.swing.JFrame {
                     txtN.setEnabled(false);
 
                 } catch (Exception e) {
-                    frmSimpsonTercio obj = new frmSimpsonTercio();
-                    obj.setVisible(true);
-                    this.dispose();
-                    JOptionPane.showMessageDialog(null, "Error en los calculos", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    //frmSimpsonOctavo obj = new frmSimpsonOctavo();
+                    //obj.setVisible(true);
+                    //this.dispose();
+                    JOptionPane.showMessageDialog(null, "Error en los calculos :"+e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
     }//GEN-LAST:event_btnCalcularActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        frmSimpsonTercio obj = new frmSimpsonTercio();
+        frmSimpsonOctavo obj = new frmSimpsonOctavo();
         obj.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnLimpiarActionPerformed
@@ -331,20 +332,21 @@ public class frmSimpsonTercio extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmSimpsonTercio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmSimpsonOctavo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmSimpsonTercio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmSimpsonOctavo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmSimpsonTercio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmSimpsonOctavo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmSimpsonTercio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmSimpsonOctavo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmSimpsonTercio().setVisible(true);
+                new frmSimpsonOctavo().setVisible(true);
             }
         });
     }
@@ -422,8 +424,8 @@ public class frmSimpsonTercio extends javax.swing.JFrame {
             evt.consume();
         }
 
-        if ((car != '0' && car != '1' && car != '2' && car != '4'
-                && car != '6' && car != '8' && car != '9')) {
+        if ((car != '0' && car != '1' && car != '2'&& car !='3' && car != '4'
+                && car !='5'&& car != '6' && car !='7'&& car != '8' && car != '9')) {
             evt.consume();
         }
     }

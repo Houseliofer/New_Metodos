@@ -14,14 +14,14 @@ public class SimpsonOctavo {
 
     DecimalFormat formato;
 
-    public String calcular(Funcion funcion, int n, float a, float b, JTable tabla) {
+    public String calcular(Funcion funcion, int n, double a, double b, JTable tabla) {
         formato = new DecimalFormat("0.000000");
         DefaultTableModel model = (DefaultTableModel) tabla.getModel();
 
         Object[] fila = new Object[3];
 
-        float resultado = 0, aux = 0;
-        float[] xi = new float[n + 1];
+        double resultado = 0, aux = 0;
+        double[] xi = new double[n + 1];
 
         for (int i = 0; i <= n; i++) {
             if (i == 0) {
@@ -39,7 +39,7 @@ public class SimpsonOctavo {
             tabla.setModel(model);
         }//fin del ciclo
         
-        for (int j = 1; j <= (n / 2) - 1; j++) {
+        for (int j = 1; j <= (n / 3) - 1; j++) {
             aux += funcion.evaluar(xi[3 * j]);
         }
         aux *= 2;
@@ -47,19 +47,21 @@ public class SimpsonOctavo {
         aux = 0;
         
         
-        for (int j = 1; j <= n- 2; j++) {
-            aux += funcion.evaluar(xi[ j ]);
+        for (int j = 1; j <= n - 1; j++) {
+            if(j%3 != 0)
+                aux += funcion.evaluar(xi[ j ]);
         }
         
-        aux *= 4;
+        aux *= 3;
         resultado += aux;
         aux = 0;
         
         resultado *= ((3*ValorH(a, b, n)) / 8);
+        System.out.println(resultado);
         return formato.format(resultado);
     }
 
-    private float ValorH(float a, float b, int n) {
+    private double ValorH(double a, double b, int n) {
         return (b - a) / n;
     }
 }

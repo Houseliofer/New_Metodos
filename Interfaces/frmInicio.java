@@ -30,6 +30,7 @@ public class frmInicio extends javax.swing.JFrame {
         btnGaussJordan = new javax.swing.JButton();
         btnGaussiana = new javax.swing.JButton();
         btnInstrucciones = new javax.swing.JButton();
+        btnSimpsonOctavo = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -240,6 +241,17 @@ public class frmInicio extends javax.swing.JFrame {
         });
         getContentPane().add(btnInstrucciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 300, -1));
 
+        btnSimpsonOctavo.setBackground(new java.awt.Color(0, 0, 0));
+        btnSimpsonOctavo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnSimpsonOctavo.setForeground(new java.awt.Color(255, 255, 255));
+        btnSimpsonOctavo.setText("Metodo Simpson 3/8");
+        btnSimpsonOctavo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSimpsonOctavoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSimpsonOctavo, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 320, 300, -1));
+
         jLabel4.setForeground(new java.awt.Color(255, 0, 0));
         jLabel4.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(102, 102, 102), null));
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 320, 360));
@@ -368,6 +380,13 @@ public class frmInicio extends javax.swing.JFrame {
         obj.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnSimpsonTercioActionPerformed
+
+    private void btnSimpsonOctavoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpsonOctavoActionPerformed
+        // TODO add your handling code here:
+        frmSimpsonOctavo obj = new frmSimpsonOctavo();
+        obj.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSimpsonOctavoActionPerformed
 public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -416,6 +435,7 @@ public static void main(String args[]) {
     private javax.swing.JButton btnRegresionhCuadratica;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnSecante;
+    private javax.swing.JButton btnSimpsonOctavo;
     private javax.swing.JButton btnSimpsonTercio;
     private javax.swing.JButton btnTrapecio;
     private javax.swing.JLabel jLabel2;
